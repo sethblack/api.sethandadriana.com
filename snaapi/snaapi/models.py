@@ -66,7 +66,7 @@ class WeddingPicture(models.Model):
         # Path to save to, name, and extension
         file_name, file_extension = os.path.splitext(self.picture.name)
 
-       if file_extension in ['.jpg', '.jpeg']:
+        if file_extension in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
         elif file_extension == '.gif':
             FTYPE = 'GIF'
