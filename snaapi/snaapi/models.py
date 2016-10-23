@@ -60,7 +60,7 @@ class WeddingPicture(models.Model):
             return False
 
         image = self.apply_orientation(image)
-        image.save()
+        image.save(self.picture.name)
 
         fh.close()
 
