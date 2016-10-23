@@ -41,7 +41,17 @@ class WeddingPicture(models.Model):
         except:
             return False
 
-        image.thumbnail((600,500), Image.ANTIALIAS)
+        # max width = 600
+        # max height = 500
+        # image.thumbnail((600,500), Image.ANTIALIAS)
+
+        width, height = im.size:
+
+        if width > height:
+            image.thumbnail((10000,500), Image.ANTIALIAS)
+        else:
+            image.thumbnail((600, 10000), Image.ANTIALIAS)
+
         fh.close()
 
         # Path to save to, name, and extension
