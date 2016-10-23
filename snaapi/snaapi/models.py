@@ -63,6 +63,18 @@ class WeddingPicture(models.Model):
 
         fh.close()
 
+        # Path to save to, name, and extension
+        file_name, file_extension = os.path.splitext(self.picture.name)
+
+       if file_extension in ['.jpg', '.jpeg']:
+            FTYPE = 'JPEG'
+        elif file_extension == '.gif':
+            FTYPE = 'GIF'
+        elif file_extension == '.png':
+            FTYPE = 'PNG'
+        else:
+            return False    # Unrecognized file type
+
         temp_img = StringIO()
         image.save(temp_img, FTYPE)
         temp_img.seek(0)
