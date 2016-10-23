@@ -21,4 +21,5 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^wedding-pictures/$', views.wedding_pictures, name='wedding-pictures'),
+    url(r'^wedding-pictures/upload/$', views.upload_wedding_pictures, name='upload-wedding-pictures'),
 ]
