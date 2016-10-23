@@ -61,8 +61,6 @@ class WeddingPicture(models.Model):
 
         image = self.apply_orientation(image)
 
-        fh.close()
-
         # Path to save to, name, and extension
         file_name, file_extension = os.path.splitext(self.picture.name)
 
@@ -78,6 +76,8 @@ class WeddingPicture(models.Model):
         temp_img = StringIO()
         image.save(temp_img, FTYPE)
         temp_img.seek(0)
+
+        fh.close()
 
         # Load a ContentFile into the thumbnail field so it gets saved
         self.picture.save(self.picture.name, ContentFile(temp_img.read()), save=False)
