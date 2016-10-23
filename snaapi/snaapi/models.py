@@ -52,6 +52,19 @@ class WeddingPicture(models.Model):
 
         return parsed_date_time
 
+    def rotate(self):
+        fh = storage.open(self.picture.name, 'r')
+        try:
+            image = Image.open(fh)
+        except:
+            return False
+
+        image = self.apply_orientation(image)
+
+        fh.close()
+
+        image.save(self.picture.name)
+
     def make_thumbnail(self):
         fh = storage.open(self.picture.name, 'r')
         try:
@@ -128,6 +141,7 @@ class WeddingPicture(models.Model):
 
         if self.picture:
             self.capture_date = self.get_date_taken()
+            self.rotate()
             self.make_thumbnail()
             super(WeddingPicture, self).save(*args, **kwargs)
 
