@@ -14,7 +14,11 @@ class WeddingPicture(models.Model):
     approved = models.BooleanField(default=True)
 
     def get_date_taken(self):
-        exif_time = Image.open(self.picture.path)._getexif()[36867]
+        try:
+            exif_time = Image.open(self.picture.path)._getexif()[36867]
+        except:
+            return None
+
         parsed_date_time = None
 
         try:
