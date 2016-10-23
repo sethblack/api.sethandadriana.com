@@ -45,7 +45,7 @@ class WeddingPicture(models.Model):
         # max height = 500
         # image.thumbnail((600,500), Image.ANTIALIAS)
 
-        width, height = im.size
+        width, height = image.size
 
         if width > height:
             image.thumbnail((10000,500), Image.ANTIALIAS)
