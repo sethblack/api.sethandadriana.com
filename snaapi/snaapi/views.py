@@ -11,6 +11,7 @@ def wedding_pictures(request):
     for p in WeddingPicture.objects.filter(approved=True).order_by('capture_date'):
         response['wedding_pictures'].append({
             'url': p.picture.url,
+            'thumbnail_url': p.thumbnail.url,
             'capture_date': p.capture_date,
             'upload_date': p.upload_date,
             'owner': p.owner,
