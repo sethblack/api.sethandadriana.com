@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from json import dumps
 from snaapi.models import WeddingPicture
 
+@csrf_exempt
 def wedding_pictures(request):
     response = {'wedding_pictures': []}
 
