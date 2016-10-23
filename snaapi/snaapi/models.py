@@ -61,7 +61,7 @@ class WeddingPicture(models.Model):
 
         width, height = image.size
 
-        image = apply_orientation(image)
+        image = self.apply_orientation(image)
 
         if width > height:
             image.thumbnail((10000,500), Image.ANTIALIAS)
