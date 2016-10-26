@@ -159,7 +159,7 @@ class WeddingPicture(models.Model):
 
         if self.picture:
             self.capture_date = self.get_date_taken()
-            self.rotate()
+            # self.rotate()
             self.make_thumbnail()
             super(WeddingPicture, self).save(*args, **kwargs)
 
