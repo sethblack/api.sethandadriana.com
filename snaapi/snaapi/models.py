@@ -158,9 +158,14 @@ class WeddingPicture(models.Model):
         super(WeddingPicture, self).save(*args, **kwargs)
 
         if self.picture:
-            self.capture_date = self.get_date_taken()
+            if self.capture_date is None:
+                self.capture_date = self.get_date_taken()
+
             # self.rotate()
-            self.make_thumbnail()
+
+            if self.thumbnail is None:
+                self.make_thumbnail()
+
             super(WeddingPicture, self).save(*args, **kwargs)
 
 
