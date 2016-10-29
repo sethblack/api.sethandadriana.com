@@ -65,7 +65,7 @@ class WeddingPicture(models.Model):
         head, tail = os.path.split(self.picture.name)
         head, ext = os.path.splitext(self.picture.name)
 
-        file_name = tail.replace(ext, '')
+        file_name = tail
 
         if ext.lower() in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
@@ -76,15 +76,7 @@ class WeddingPicture(models.Model):
         else:
             return False
 
-        temp_img = StringIO()
-        image.save(temp_img, FTYPE)
-        temp_img.seek(0)
-
-        fh.close()
-
-        # Load a ContentFile into the thumbnail field so it gets saved
-        self.picture.save(file_name, ContentFile(temp_img.read()), save=True)
-        temp_img.close()
+        image.save(self.picture.name, FTYPE)
 
     def make_thumbnail(self):
         fh = storage.open(self.picture.name, 'r')
@@ -108,8 +100,6 @@ class WeddingPicture(models.Model):
         head, tail = os.path.split(self.picture.name)
         head, ext = os.path.splitext(self.picture.name)
 
-        file_name = tail.replace(ext, '')
-
         thumb_filename = file_name + '_thumb' + ext
 
         if ext.lower() in ['.jpg', '.jpeg']:
@@ -127,7 +117,7 @@ class WeddingPicture(models.Model):
         temp_thumb.seek(0)
 
         # Load a ContentFile into the thumbnail field so it gets saved
-        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=True)
+        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
         temp_thumb.close()
 
         return True
