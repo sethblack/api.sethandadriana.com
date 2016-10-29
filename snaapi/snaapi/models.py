@@ -1,4 +1,5 @@
 from cStringIO import StringIO
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage as storage
 from django.db import models
@@ -76,7 +77,7 @@ class WeddingPicture(models.Model):
         else:
             return False
 
-        image.save(self.picture.name, FTYPE)
+        image.save(os.path.join(settings.MEDIA_ROOT, self.picture.name), FTYPE)
 
     def make_thumbnail(self):
         fh = storage.open(self.picture.name, 'r')
