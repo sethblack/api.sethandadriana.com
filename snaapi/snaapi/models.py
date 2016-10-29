@@ -62,16 +62,19 @@ class WeddingPicture(models.Model):
         image = self.apply_orientation(image)
 
         # Path to save to, name, and extension
-        file_name, file_extension = os.path.splitext(self.picture.name)
+        head, tail = os.path.split(self.picture.name)
+        head, ext = os.path.splitext(self.picture.name)
 
-        if file_extension in ['.jpg', '.jpeg']:
+        file_name = tail.replace(ext, '')
+
+        if ext.lower() in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
-        elif file_extension == '.gif':
+        elif ext.lower() == '.gif':
             FTYPE = 'GIF'
-        elif file_extension == '.png':
+        elif ext.lower() == '.png':
             FTYPE = 'PNG'
         else:
-            return False    # Unrecognized file type
+            return False
 
         temp_img = StringIO()
         image.save(temp_img, FTYPE)
@@ -80,7 +83,7 @@ class WeddingPicture(models.Model):
         fh.close()
 
         # Load a ContentFile into the thumbnail field so it gets saved
-        self.picture.save(self.picture.name, ContentFile(temp_img.read()), save=False)
+        self.picture.save(file_name, ContentFile(temp_img.read()), save=False)
         temp_img.close()
 
     def make_thumbnail(self):
@@ -102,22 +105,21 @@ class WeddingPicture(models.Model):
         fh.close()
 
         # Path to save to, name, and extension
-        thumb_name, thumb_extension = os.path.splitext(self.picture.name)
+        head, tail = os.path.split(self.picture.name)
+        head, ext = os.path.splitext(self.picture.name)
 
-        thumb_name = re.sub(r'weddingpictures/full/[\d]+/[\d]+/[\d]+/', '', thumb_name)
+        file_name = tail.replace(ext, '')
 
-        thumb_extension = thumb_extension.lower()
+        thumb_filename = file_name + '_thumb' + ext
 
-        thumb_filename = thumb_name + '_thumb' + thumb_extension
-
-        if thumb_extension in ['.jpg', '.jpeg']:
+        if ext.lower() in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
-        elif thumb_extension == '.gif':
+        elif ext.lower() == '.gif':
             FTYPE = 'GIF'
-        elif thumb_extension == '.png':
+        elif ext.lower() == '.png':
             FTYPE = 'PNG'
         else:
-            return False    # Unrecognized file type
+            return False
 
         # Save thumbnail to in-memory file as StringIO
         temp_thumb = StringIO()
