@@ -100,6 +100,7 @@ class WeddingPicture(models.Model):
         head, tail = os.path.split(self.picture.name)
         head, ext = os.path.splitext(self.picture.name)
 
+        file_name = tail.replace(ext, '')
         thumb_filename = file_name + '_thumb' + ext
 
         if ext.lower() in ['.jpg', '.jpeg']:
