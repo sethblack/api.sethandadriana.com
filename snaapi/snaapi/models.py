@@ -83,7 +83,7 @@ class WeddingPicture(models.Model):
         fh.close()
 
         # Load a ContentFile into the thumbnail field so it gets saved
-        self.picture.save(file_name, ContentFile(temp_img.read()), save=False)
+        self.picture.save(file_name, ContentFile(temp_img.read()), save=True)
         temp_img.close()
 
     def make_thumbnail(self):
@@ -127,7 +127,7 @@ class WeddingPicture(models.Model):
         temp_thumb.seek(0)
 
         # Load a ContentFile into the thumbnail field so it gets saved
-        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=True)
         temp_thumb.close()
 
         return True
