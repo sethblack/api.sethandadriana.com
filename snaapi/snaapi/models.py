@@ -161,7 +161,7 @@ class WeddingPicture(models.Model):
             if self.capture_date is None:
                 self.capture_date = self.get_date_taken()
 
-            # self.rotate()
+            self.rotate()
 
             if self.thumbnail is None:
                 self.make_thumbnail()
