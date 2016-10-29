@@ -163,7 +163,7 @@ class WeddingPicture(models.Model):
 
             self.rotate()
 
-            if self.thumbnail is None:
+            if len(self.thumbnail) == 0:
                 self.make_thumbnail()
 
             super(WeddingPicture, self).save(*args, **kwargs)
