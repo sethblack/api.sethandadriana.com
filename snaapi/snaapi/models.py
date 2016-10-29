@@ -34,7 +34,7 @@ class WeddingPicture(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
     capture_date = models.DateTimeField(null=True, blank=True, default=None)
     picture = models.ImageField(upload_to='weddingpictures/full/%Y/%m/%d/')
-    thumbnail = models.ImageField(upload_to='weddingpictures/thumbs/%Y/%m/%d/', editable=False)
+    thumbnail = models.ImageField(upload_to='weddingpictures/thumbs/%Y/%m/%d/')
     approved = models.BooleanField(default=True)
 
     def get_date_taken(self):
