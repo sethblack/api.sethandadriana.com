@@ -21,6 +21,7 @@ def wedding_pictures(request):
             'capture_date': p.capture_date,
             'upload_date': p.upload_date,
             'owner': p.owner,
+            'pkey': p.id,
         })
 
     return HttpResponse(dumps(response, cls=DjangoJSONEncoder), content_type='application/json')
