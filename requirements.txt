@@ -1,0 +1,4 @@
+Django==1.10.2
+Pillow==3.4.2
+django-cors-headers==1.2.2
+wsgiref==0.1.2
