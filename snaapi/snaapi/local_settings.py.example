@@ -1,0 +1,7 @@
+SECRET_KEY = 'secretkey'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+MEDIA_ROOT = '/Users/sethblack/Programming/fakeuploaddir'
+MEDIA_URL = '/media/'
